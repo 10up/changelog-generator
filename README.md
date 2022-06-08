@@ -23,7 +23,7 @@ The script will:
 ## Command-line Arguments
 
 ### --milestone, -m
-(Required) Specify the name of target milestone to extract changelod entries from.
+(Required) Specify the name of target milestone to extract changelog entries from.
 
 ### --pat, -p
 (Optional) GitHub personal access token. Default is `empty`
