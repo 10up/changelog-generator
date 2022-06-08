@@ -1,0 +1,20 @@
+{
+  "name": "@10up/changelog-generator",
+  "repository": "@10up/changelog-generator",
+  "version": "0.1.0",
+  "description": "Generate changelog from milestone PRs and issues",
+  "main": "cli.js",
+  "bin": {
+    "changelog-generator": "cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "execa": "^6.1.0",
+    "meow": "^10.1.2",
+    "octokit": "^1.7.2"
+  }
+}
