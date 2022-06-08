@@ -1,5 +1,8 @@
-const knownPrefixes =
-  /^(Added|Changed|Deprecated|Removed|Fixed|Security) - (.*?)$/;
+let knownPrefixes;
+
+export function addPrefixes(pattern) {
+  knownPrefixes = new RegExp(pattern);
+}
 
 export function makeChangelog(issue, participants) {
   // PR title by default.
