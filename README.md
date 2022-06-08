@@ -59,20 +59,20 @@ npx: installed 163 in 307.466s
 
 ### Added
 - Dependency security scanning. (props [@jeffpaul](https://github.com/jeffpaul), [@cadic](https://github.com/cadic)) via [#168](https://github.com/10up/simple-podcasting/pull/168))
- -Default Pull Request Reviewers via `CODEOWNERS` file. (props [@jeffpaul](https://github.com/jeffpaul), [@cadic](https://github.com/cadic)) via [#156](https://github.com/10up/simple-podcasting/pull/156))
- -Compatibility tests against PHP 7 and 8. (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter)) via [#150](https://github.com/10up/simple-podcasting/pull/150))
+- Default Pull Request Reviewers via `CODEOWNERS` file. (props [@jeffpaul](https://github.com/jeffpaul), [@cadic](https://github.com/cadic)) via [#156](https://github.com/10up/simple-podcasting/pull/156))
+- Compatibility tests against PHP 7 and 8. (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter)) via [#150](https://github.com/10up/simple-podcasting/pull/150))
 
 ### Security
 - Bump async from 2.6.3 to 2.6.4 (props [@dependabot[bot]](https://github.com/apps/dependabot), [@jeffpaul](https://github.com/jeffpaul), [@cadic](https://github.com/cadic)) via [#166](https://github.com/10up/simple-podcasting/pull/166))
- -Bump minimist from 1.2.5 to 1.2.6 (props [@dependabot[bot]](https://github.com/apps/dependabot), [@cadic](https://github.com/cadic)) via [#160](https://github.com/10up/simple-podcasting/pull/160))
- -Bump node-forge from 1.2.1 to 1.3.0 (props [@dependabot[bot]](https://github.com/apps/dependabot), [@cadic](https://github.com/cadic)) via [#159](https://github.com/10up/simple-podcasting/pull/159))
+- Bump minimist from 1.2.5 to 1.2.6 (props [@dependabot[bot]](https://github.com/apps/dependabot), [@cadic](https://github.com/cadic)) via [#160](https://github.com/10up/simple-podcasting/pull/160))
+- Bump node-forge from 1.2.1 to 1.3.0 (props [@dependabot[bot]](https://github.com/apps/dependabot), [@cadic](https://github.com/cadic)) via [#159](https://github.com/10up/simple-podcasting/pull/159))
 
 ### Changed
 - Upgrade node dependencies (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul)) via [#163](https://github.com/10up/simple-podcasting/pull/163))
- -Replaced custom commands with @10up/cypress-wp-utils in end-to-end tests (props [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@cadic](https://github.com/cadic)) via [#162](https://github.com/10up/simple-podcasting/pull/162))
- -Upgrade wp-scripts, wp-env, cypress and other minor dependencies to latest versions (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul)) via [#158](https://github.com/10up/simple-podcasting/pull/158))
- -Unit tests against PHP 8 (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter)) via [#150](https://github.com/10up/simple-podcasting/pull/150))
- -Bump required PHP 7.0 (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter)) via [#150](https://github.com/10up/simple-podcasting/pull/150))
+- Replaced custom commands with @10up/cypress-wp-utils in end-to-end tests (props [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@cadic](https://github.com/cadic)) via [#162](https://github.com/10up/simple-podcasting/pull/162))
+- Upgrade wp-scripts, wp-env, cypress and other minor dependencies to latest versions (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul)) via [#158](https://github.com/10up/simple-podcasting/pull/158))
+- Unit tests against PHP 8 (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter)) via [#150](https://github.com/10up/simple-podcasting/pull/150))
+- Bump required PHP 7.0 (props [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul), [@dkotter](https://github.com/dkotter)) via [#150](https://github.com/10up/simple-podcasting/pull/150))
 
 ### Fixed
 - Add `<enclosure>` to feed item. (props [@davexpression](https://github.com/davexpression), [@cadic](https://github.com/cadic), [@jeffpaul](https://github.com/jeffpaul)) via [#155](https://github.com/10up/simple-podcasting/pull/155))
