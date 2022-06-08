@@ -51,7 +51,7 @@ npx github:10up/changelog-generator --milestone=1.2.3 --style=grouped
 Output for "Grouped" style:
 
 ```
-❯ npx github:10up/changelog-generator -m 1.2.3 -p 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 --style=grouped --quiet
+❯ npx github:10up/changelog-generator -m 1.2.3 --style=grouped --quiet
 npx: installed 163 in 307.466s
 
 
