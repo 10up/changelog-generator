@@ -78,7 +78,7 @@ Options:
       const groups = makeGroups(entries);
       console.log("\n\n## Changelog:");
       for (const [key, records] of Object.entries(groups)) {
-        console.log(`\n### ${key}\n- ` + records.join("\n -"));
+        console.log(`\n### ${key}\n- ` + records.join("\n- "));
       }
       break;
 
