@@ -1,0 +1,94 @@
+#!/usr/bin/env node
+import meow from "meow";
+import GitHub from "./src/github.js";
+import { makeChangelog, makeGroups } from "./src/parse.js";
+
+async function run() {
+  const cli = meow(
+    `
+Usage
+$ changelog-generator
+
+Options:
+--milestone, -m  Milestone title.
+--pat, -p        Personal access token.
+--style, -s      Changelog style: plain (default)
+--quiet          Disable debug output
+`,
+    {
+      importMeta: import.meta,
+      flags: {
+        milestone: {
+          type: "string",
+          alias: "m",
+        },
+        pat: {
+          type: "string",
+          alias: "p",
+        },
+        style: {
+          type: "string",
+          alias: "s",
+          default: "plain", // TODO Add "grouped" option
+        },
+        quiet: {
+          type: "boolean",
+          defalut: false,
+        },
+      },
+    }
+  );
+
+  if (!cli.flags.milestone) {
+    cli.showHelp();
+  }
+
+  !cli.flags.quiet &&
+    console.log(`Reading issues from Milestone "${cli.flags.milestone}"`);
+
+  const github = new GitHub({
+    ...(cli.flags.pat ? { auth: cli.flags.pat } : {}),
+  });
+  await github.init();
+
+  const prs = await github.getIssues(cli.flags.milestone);
+
+  !cli.flags.quiet && console.log(`Found PRs: ${prs.length}`);
+
+  let entries = [];
+
+  for (let pr of prs) {
+    !cli.flags.quiet && console.log(`PR "${pr.title}"`);
+
+    const participants = await github.getParticipants(pr);
+
+    !cli.flags.quiet &&
+      console.log(`Found ${participants.length} participants`);
+
+    const lines = makeChangelog(pr, participants);
+
+    !cli.flags.quiet &&
+      console.log(`Extracted ${lines.length} changelog records`);
+
+    entries = entries.concat(lines);
+  }
+
+  switch (cli.flags.style) {
+    case "grouped":
+      const groups = makeGroups(entries);
+      console.log("\n\n## Changelog:");
+      for (const [key, records] of Object.entries(groups)) {
+        console.log(`\n### ${key}\n- ` + records.join("\n -"));
+      }
+      break;
+
+    case "plain":
+    default:
+      console.log(
+        "\n\n## Changelog:\n\n- " + entries.flat().sort().join("\n- ")
+      );
+      break;
+  }
+}
+
+run();

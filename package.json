@@ -16,6 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "execa": "^6.1.0",
     "meow": "^10.1.2",
