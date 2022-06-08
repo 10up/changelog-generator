@@ -7,10 +7,14 @@
   "bin": {
     "changelog-generator": "cli.js"
   },
+  "author": {
+    "name": "10up",
+    "email": "opensource@10up.com",
+    "url": "https://10up.com"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "execa": "^6.1.0",
