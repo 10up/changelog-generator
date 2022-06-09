@@ -6,21 +6,24 @@ export default class GitHub {
     this.octokit = new Octokit(args);
   }
 
-  async init() {
-    this.repo = await this.getRepoInfo();
+  async init(repo) {
+    this.repo = await this.getRepoInfo(repo);
   }
 
-  async getRepoInfo() {
-    const { stdout } = await execa("git", [
-      "config",
-      "--get",
-      "remote.origin.url",
-    ]);
+  async getRepoInfo(repo = "") {
+    if (repo.length === 0) {
+      const { stdout } = await execa("git", [
+        "config",
+        "--get",
+        "remote.origin.url",
+      ]);
+      repo = stdout;
+    }
 
-    let result = /:(\w+)\/([A-Za-z0-9-_]+)/.exec(stdout);
+    let result = /:(\w+)\/([A-Za-z0-9-_]+)/.exec(repo);
 
     if (!result) {
-      result = /github.com\/(\w+)\/([A-Za-z0-9-_]+)/.exec(stdout);
+      result = /github.com\/(\w+)\/([A-Za-z0-9-_]+)/.exec(repo);
     }
 
     if (!result) {
