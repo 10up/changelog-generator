@@ -12,6 +12,9 @@
     "email": "opensource@10up.com",
     "url": "https://10up.com"
   },
+  "engines": {
+    "node": ">=16.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
