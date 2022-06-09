@@ -12,6 +12,7 @@ $ changelog-generator
 Options:
 --milestone, -m  Milestone title.
 --pat, -p        Personal access token.
+--repo           Repository address.
 --style, -s      Changelog style: plain (default)
 --quiet          Disable debug output
 `,
@@ -25,6 +26,9 @@ Options:
         pat: {
           type: "string",
           alias: "p",
+        },
+        repo: {
+          type: "string",
         },
         style: {
           type: "string",
@@ -49,7 +53,7 @@ Options:
   const github = new GitHub({
     ...(cli.flags.pat ? { auth: cli.flags.pat } : {}),
   });
-  await github.init();
+  await github.init(cli.flags.repo);
 
   const prs = await github.getIssues(cli.flags.milestone);
 

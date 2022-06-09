@@ -28,6 +28,9 @@ The script will:
 ### --pat, -p
 (Optional) GitHub personal access token. Default is `empty`
 
+### --repo
+(Optional) Custom GitHub repository address. Default is `empty`, use repository from the current folder.
+
 ### --style, -s
 (Optional) Output style
 - `grouped` Group changelog entries (Added, Fixed, etc.)
