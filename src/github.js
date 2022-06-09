@@ -34,7 +34,7 @@ export default class GitHub {
   }
 
   async getIssues(milestone, issues = [], page = 1) {
-    const query = `milestone:${milestone} type:pr state:closed repo:${this.repo.owner}/${this.repo.name}`;
+    const query = `milestone:"${milestone}" type:pr state:closed repo:${this.repo.owner}/${this.repo.name}`;
     const batch = await this.octokit.request("GET /search/issues", {
       owner: this.repo.owner,
       repo: this.repo.name,
