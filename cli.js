@@ -34,7 +34,6 @@ Options:
         },
         prefixes: {
           type: "string",
-          alias: "pf",
           default: "Added,Changed,Deprecated,Removed,Fixed,Security"
         },
         quiet: {

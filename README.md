@@ -36,7 +36,7 @@ The script will:
 ### --quiet
 (Optional) Disable debug output, only the resulting changelog will be printed.
 
-### --prefixes, -pf
+### --prefixes
 (Optional) PR prefixes. Default: Added,Changed,Deprecated,Removed,Fixed,Security.
 
 ## Example with Simple Podcasting
