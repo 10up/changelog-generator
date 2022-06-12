@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import meow from "meow";
 import GitHub from "./src/github.js";
-import { makeChangelog, makeGroups } from "./src/parse.js";
+import { makeChangelog, makeGroups, addPrefixes } from "./src/parse.js";
 
 async function run() {
   const cli = meow(
@@ -14,6 +14,7 @@ Options:
 --pat, -p        Personal access token.
 --repo           Repository address.
 --style, -s      Changelog style: plain (default)
+--prefixes       PR prefixes. Default: Added,Changed,Deprecated,Removed,Fixed,Security
 --quiet          Disable debug output
 `,
     {
@@ -35,6 +36,10 @@ Options:
           alias: "s",
           default: "plain", // TODO Add "grouped" option
         },
+        prefixes: {
+          type: "string",
+          default: "Added,Changed,Deprecated,Removed,Fixed,Security"
+        },
         quiet: {
           type: "boolean",
           defalut: false,
@@ -42,6 +47,9 @@ Options:
       },
     }
   );
+
+  let prefixesPattern = '^(' + cli.flags.prefixes.replaceAll(",", "|") + ') - (.*?)$';
+  addPrefixes(prefixesPattern);
 
   if (!cli.flags.milestone) {
     cli.showHelp();

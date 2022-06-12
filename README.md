@@ -39,6 +39,9 @@ The script will:
 ### --quiet
 (Optional) Disable debug output, only the resulting changelog will be printed.
 
+### --prefixes
+(Optional) PR prefixes. Default: Added,Changed,Deprecated,Removed,Fixed,Security.
+
 ## Example with Simple Podcasting
 
 Let's create a changelog for the [release version 1.2.3](https://github.com/10up/simple-podcasting/milestone/11?closed=1)
