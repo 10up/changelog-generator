@@ -13,7 +13,7 @@ Options:
 --milestone, -m  Milestone title.
 --pat, -p        Personal access token.
 --style, -s      Changelog style: plain (default)
---prefixes, -pf  PR prefixes. Default: Added,Changed,Deprecated,Removed,Fixed,Security
+--prefixes       PR prefixes. Default: Added,Changed,Deprecated,Removed,Fixed,Security
 --quiet          Disable debug output
 `,
     {
