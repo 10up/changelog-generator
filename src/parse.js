@@ -5,16 +5,23 @@ export function addPrefixes(pattern) {
 }
 
 export function makeChangelog(issue, participants) {
-  // PR title by default.
-  let lines = [issue.title];
+  let lines = [];
 
   // Try to extract changelog entries from the description.
   const cleanBody = issue.body.replace(/<!--.*?-->/gs, "");
 
   const matches = /#\s*Changelog.*\r?\n([^#]+)/.exec(cleanBody);
   if (matches !== null) {
-    const changelog = matches[1];
-    lines = changelog.split(/\r?\n/);
+    const changelog = matches[1].trim().split(/\r?\n/);
+
+    lines = changelog
+      .map((entry) => entry.trim())
+      .filter((entry) => entry.length);
+  }
+
+  // PR title by default.
+  if (lines.length === 0) {
+	lines = [issue.title];	  
   }
 
   return lines
