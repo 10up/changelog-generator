@@ -48,7 +48,7 @@ Options:
     }
   );
 
-  let prefixesPattern = '^(' + cli.flags.prefixes.replaceAll(",", "|") + ') - (.*?)$';
+  let prefixesPattern = '^(' + cli.flags.prefixes.replaceAll(",", "|") + '|Other) - (.*?)$';
   addPrefixes(prefixesPattern);
 
   if (!cli.flags.milestone) {
