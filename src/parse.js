@@ -63,7 +63,7 @@ function addProps(line, participants) {
     (item) => `[@${item.login}](${item.html_url})`
   );
 
-  const propsStr = [...new Set(props)].join(", ");
+  const propsStr = props.join(", ");
   return line + ` (props ${propsStr})`;
 }
 
