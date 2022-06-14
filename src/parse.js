@@ -45,6 +45,23 @@ export function makeGroups(entries) {
   return groups;
 }
 
+export function makeCredits(issue) {
+  const cleanBody = issue.body.replace(/<!--.*?-->/gs, "");
+  let credits = [];
+  const matches = /#\s*Credits.*\r?\n([^#]+)/.exec(cleanBody);
+  if (matches !== null) {
+    credits = matches[1].match(/@([^\s,]+)/g);
+    if (credits !== null) {
+      return credits.map((item) => {
+        item = item.trim().replace("@", "");
+        return { login: item, html_url: "https://github.com/" + item };
+      });
+    }
+  }
+
+  return [];
+}
+
 function makePrefix(line, participants) {
   if (!knownPrefixes.test(line)) {
     if (participants.find((el) => el.login === "dependabot[bot]")) {

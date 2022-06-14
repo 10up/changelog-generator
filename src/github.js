@@ -1,5 +1,6 @@
 import { execa } from "execa";
 import { Octokit } from "octokit";
+import { makeCredits } from "./parse.js";
 
 export default class GitHub {
   constructor(args = {}) {
@@ -66,6 +67,10 @@ export default class GitHub {
   }
 
   async getParticipants(issue, participants = [], page = 1) {
+    if (participants.length === 0) {
+      participants = makeCredits(issue);
+    }
+
     const batch = await this.octokit.request(
       "GET /repos/{owner}/{repo}/issues/{issue}/timeline",
       {
