@@ -20,7 +20,9 @@ export function makeChangelog(issue, participants) {
   }
 
   // PR title by default.
-  lines = [issue.title];
+  if (lines.length === 0) {
+	lines = [issue.title];	  
+  }
 
   return lines
     .filter((line) => line.length > 0) // non-empty
