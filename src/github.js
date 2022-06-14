@@ -67,7 +67,7 @@ export default class GitHub {
 
   async getParticipants(issue, participants = [], page = 1) {
     const batch = await this.octokit.request(
-      "GET /repos/{owner}/{repo}/issues/{issue}/events",
+      "GET /repos/{owner}/{repo}/issues/{issue}/timeline",
       {
         owner: this.repo.owner,
         repo: this.repo.name,
@@ -83,7 +83,26 @@ export default class GitHub {
       return participants;
     }
 
-    const newParticipants = batch.data.map((item) => item.actor);
+    const newParticipants = batch.data
+      .filter((item) => {
+        if (
+          !["subscribed", "unsubscribed"].includes(item.event) &&
+          (item.hasOwnProperty("actor") || item.hasOwnProperty("user"))
+        ) {
+          // Only take items from timeline which are
+          // not subscription events and have extractable user
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .map((item) => {
+        const result = item.hasOwnProperty("actor")
+          ? { login: item.actor.login, html_url: item.actor.html_url }
+          : { login: item.user.login, html_url: item.user.html_url };
+
+        return result;
+      });
 
     if (newParticipants.length >= 100) {
       return await this.getParticipants(
@@ -93,6 +112,18 @@ export default class GitHub {
       );
     }
 
-    return [...new Set(participants.concat(newParticipants))];
+    // Make unique results array.
+    const result = [];
+    const map = new Map();
+    for (const item of participants.concat(newParticipants)) {
+      if (!map.has(item.login)) {
+        map.set(item.login, true);
+        result.push({
+          login: item.login,
+          html_url: item.html_url,
+        });
+      }
+    }
+    return result;
   }
 }
