@@ -13,7 +13,7 @@ Options:
 --milestone, -m  Milestone title.
 --pat, -p        Personal access token.
 --repo           Repository address.
---style, -s      Changelog style: plain (default)
+--style, -s      Changelog style comma separated: plain (default), wordpress, grouped
 --prefixes       PR prefixes. Default: Added,Changed,Deprecated,Removed,Fixed,Security
 --quiet          Disable debug output
 `,
@@ -34,11 +34,11 @@ Options:
         style: {
           type: "string",
           alias: "s",
-          default: "plain", // TODO Add "grouped" option
+          default: "plain",
         },
         prefixes: {
           type: "string",
-          default: "Added,Changed,Deprecated,Removed,Fixed,Security"
+          default: "Added,Changed,Deprecated,Removed,Fixed,Security",
         },
         quiet: {
           type: "boolean",
@@ -48,12 +48,21 @@ Options:
     }
   );
 
-  let prefixesPattern = '^(' + cli.flags.prefixes.replaceAll(",", "|") + '|Other) - (.*?)$';
+  let prefixesPattern =
+    "^(" + cli.flags.prefixes.replaceAll(",", "|") + "|Other) - (.*?)$";
   addPrefixes(prefixesPattern);
 
   if (!cli.flags.milestone) {
     cli.showHelp();
   }
+
+  const styles = cli.flags.style.split(",");
+  styles.forEach((style) => {
+    if (!["plain", "grouped", "wordpress"].includes(style)) {
+      console.log(`\n\nWrong "style" option: ${style}`);
+      cli.showHelp();
+    }
+  });
 
   !cli.flags.quiet &&
     console.log(`Reading issues from Milestone "${cli.flags.milestone}"`);
@@ -85,22 +94,33 @@ Options:
     entries = entries.concat(lines);
   }
 
-  switch (cli.flags.style) {
-    case "grouped":
-      const groups = makeGroups(entries);
-      console.log("\n\n## Changelog:");
-      for (const [key, records] of Object.entries(groups)) {
-        console.log(`\n### ${key}\n- ` + records.join("\n- "));
-      }
-      break;
+  entries = entries.sort();
+  const groups = makeGroups(entries);
 
-    case "plain":
-    default:
-      console.log(
-        "\n\n## Changelog:\n\n- " + entries.flat().sort().join("\n- ")
-      );
-      break;
-  }
+  styles.forEach((style) => {
+    switch (style) {
+      case "wordpress":
+        const date = new Date().toISOString().substring(0, 10);
+        console.log(`== Changelog ==\n\n= ${cli.flags.milestone} - ${date} =`);
+        for (const [key, records] of Object.entries(groups)) {
+          records.forEach((record) => {
+            console.log(`* **${key}** ${record}`);
+          });
+        }
+        break;
+      case "grouped":
+        console.log("\n\n## Changelog:");
+        for (const [key, records] of Object.entries(groups)) {
+          console.log(`\n### ${key}\n- ` + records.join("\n- "));
+        }
+        break;
+      case "plain":
+      default:
+        console.log("\n\n## Changelog:");
+        console.log("\n- " + entries.flat().sort().join("\n- "));
+        break;
+    }
+  });
 }
 
 run();
