@@ -32,7 +32,7 @@ The script will:
 (Optional) Custom GitHub repository address. Default is `empty`, use repository from the current folder.
 
 ### --style, -s
-(Optional) Output style
+(Optional) Output style, multiple comma-separated values allowed
 - `grouped` Group changelog entries (Added, Fixed, etc.)
 - `wordpress` WordPress readme.txt format
 - `plain` (default) plain list of changelog entries
