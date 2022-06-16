@@ -34,6 +34,7 @@ The script will:
 ### --style, -s
 (Optional) Output style
 - `grouped` Group changelog entries (Added, Fixed, etc.)
+- `wordpress` WordPress readme.txt format
 - `plain` (default) plain list of changelog entries
 
 ### --quiet
