@@ -44,4 +44,22 @@ describe("Credits tests", () => {
     expect(result[0].login).to.equal("random-name");
     expect(result[0].html_url).to.equal("https://github.com/random-name");
   });
+
+  it("empty credits", () => {
+    const issue = {
+      body: "### Credits\nnobody",
+    };
+    const result = makeCredits(issue);
+    expect(result.length).to.equal(0);
+  });
+
+  it("correct github usernames", () => {
+    const issue = {
+      body: "### Credits\n@correct-name @incorrect_name @another-incorrect-",
+    };
+	const result = makeCredits(issue);
+	expect(result.length).to.equal(1);
+    expect(result[0].login).to.equal("correct-name");
+    expect(result[0].html_url).to.equal("https://github.com/correct-name");
+  });
 });
