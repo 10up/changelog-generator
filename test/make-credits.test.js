@@ -57,8 +57,9 @@ describe("Credits tests", () => {
     const issue = {
       body: "### Credits\n@correct-name @incorrect_name @another-incorrect-",
     };
-	const result = makeCredits(issue);
-	expect(result.length).to.equal(1);
+    const result = makeCredits(issue);
+    console.log(result);
+    expect(result.length).to.equal(1);
     expect(result[0].login).to.equal("correct-name");
     expect(result[0].html_url).to.equal("https://github.com/correct-name");
   });
