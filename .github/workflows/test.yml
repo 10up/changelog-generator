@@ -37,7 +37,7 @@ jobs:
             node_modules
             ~/.cache
             ~/.npm
-          key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
         run: npm install
       - name: Test
