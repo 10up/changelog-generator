@@ -35,4 +35,13 @@ describe("Credits tests", () => {
     expect(result[0].html_url).to.equal("https://github.com/random-name");
   });
 
+  it("false positive from comment", () => {
+    const issue = {
+      body: "<!-- ### Credits \n @should-not -->### Credits\n\nProps @random-name",
+    };
+    const result = makeCredits(issue);
+    expect(result.length).to.equal(1);
+    expect(result[0].login).to.equal("random-name");
+    expect(result[0].html_url).to.equal("https://github.com/random-name");
+  });
 });
