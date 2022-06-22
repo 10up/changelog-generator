@@ -2,6 +2,11 @@
 
 A simple tool to automate changelog generation during release process.
 
+## Requirements
+
+- Node 16
+- Using GitHub personal access token (with `--pat` argument) is highly recommended
+
 ## Usage
 
 Go to your project git folder and run the script.
