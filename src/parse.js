@@ -50,12 +50,16 @@ export function makeCredits(issue) {
   let credits = [];
   const matches = /#\s*Credits.*\r?\n([^#]+)/.exec(cleanBody);
   if (matches !== null) {
-    credits = matches[1].match(/@([\w\-^_]+)/g);
+    credits = matches[1].match(/@([\w-]+)/g);
     if (credits !== null) {
-      return credits.map((item) => {
-        item = item.trim().replace("@", "");
-        return { login: item, html_url: "https://github.com/" + item };
-      });
+      return credits
+        .map((item) => {
+          item = item.trim().replace("@", "");
+          return { login: item, html_url: "https://github.com/" + item };
+        })
+        .filter((credit) => {
+          return credit.login.match(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i);
+        });
     }
   }
 
