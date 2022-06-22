@@ -57,7 +57,7 @@ export function makeCredits(issue) {
   let credits = [];
   const matches = /#\s*Credits.*\r?\n([^#]+)/.exec(cleanBody);
   if (matches !== null) {
-    credits = matches[1].match(/@([^\s,]+)/g);
+    credits = matches[1].match(/@(^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38})/g);
     if (credits !== null) {
       return credits.map((item) => {
         item = item.trim().replace("@", "");
