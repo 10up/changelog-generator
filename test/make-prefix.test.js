@@ -32,5 +32,5 @@ describe("Prefix tests", () => {
     const participants = [{ login: "login" }, { login: "login2" }];
     const result = makePrefix(line, participants);
     expect(result).to.equal("Other - Feature");
-  })
+  });
 });

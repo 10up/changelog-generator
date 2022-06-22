@@ -26,7 +26,7 @@ export function makeChangelog(issue, participants) {
 }
 
 export function makeGroups(entries) {
-  const groups = [];
+  const groups = {};
 
   entries.forEach((entry) => {
     const matches = knownPrefixes.exec(entry);
@@ -79,15 +79,15 @@ export function makePrefix(line, participants) {
   return line;
 }
 
-function addProps(line, participants) {
+export function addProps(line, participants) {
   const props = participants.map(
     (item) => `[@${item.login}](${item.html_url})`
   );
 
   const propsStr = props.join(", ");
-  return line + ` (props ${propsStr})`;
+  return line + ` (props ${propsStr}`;
 }
 
-function addVia(line, issue) {
+export function addVia(line, issue) {
   return line + ` via [#${issue.number}](${issue.html_url}))`;
 }
