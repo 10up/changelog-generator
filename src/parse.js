@@ -5,23 +5,16 @@ export function addPrefixes(pattern) {
 }
 
 export function makeChangelog(issue, participants) {
-  let lines = [];
+  // PR title by default.
+  let lines = [issue.title];
 
   // Try to extract changelog entries from the description.
   const cleanBody = issue.body.replace(/<!--.*?-->/gs, "");
 
   const matches = /#\s*Changelog.*\r?\n([^#]+)/.exec(cleanBody);
   if (matches !== null) {
-    const changelog = matches[1].trim().split(/\r?\n/);
-
-    lines = changelog
-      .map((entry) => entry.trim())
-      .filter((entry) => entry.length);
-  }
-
-  // PR title by default.
-  if (lines.length === 0) {
-	lines = [issue.title];	  
+    const changelog = matches[1];
+    lines = changelog.split(/\r?\n/);
   }
 
   return lines
@@ -57,7 +50,7 @@ export function makeCredits(issue) {
   let credits = [];
   const matches = /#\s*Credits.*\r?\n([^#]+)/.exec(cleanBody);
   if (matches !== null) {
-    credits = matches[1].match(/@(^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38})/g);
+    credits = matches[1].match(/@([\w\-^_]+)/g);
     if (credits !== null) {
       return credits.map((item) => {
         item = item.trim().replace("@", "");
