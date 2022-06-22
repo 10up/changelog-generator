@@ -1,4 +1,4 @@
-let knownPrefixes;
+export let knownPrefixes;
 
 export function addPrefixes(pattern) {
   knownPrefixes = new RegExp(pattern);
@@ -26,7 +26,7 @@ export function makeChangelog(issue, participants) {
 }
 
 export function makeGroups(entries) {
-  const groups = [];
+  const groups = {};
 
   entries.forEach((entry) => {
     const matches = knownPrefixes.exec(entry);
@@ -66,7 +66,7 @@ export function makeCredits(issue) {
   return [];
 }
 
-function makePrefix(line, participants) {
+export function makePrefix(line, participants) {
   if (!knownPrefixes.test(line)) {
     if (participants.find((el) => el.login === "dependabot[bot]")) {
       // Put @dependabot PRs to "Security" group
@@ -79,15 +79,15 @@ function makePrefix(line, participants) {
   return line;
 }
 
-function addProps(line, participants) {
+export function addProps(line, participants) {
   const props = participants.map(
     (item) => `[@${item.login}](${item.html_url})`
   );
 
   const propsStr = props.join(", ");
-  return line + ` (props ${propsStr})`;
+  return line + ` (props ${propsStr}`;
 }
 
-function addVia(line, issue) {
+export function addVia(line, issue) {
   return line + ` via [#${issue.number}](${issue.html_url}))`;
 }
