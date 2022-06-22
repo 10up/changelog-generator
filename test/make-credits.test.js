@@ -1,5 +1,4 @@
 import { makeCredits } from "../src/parse.js";
-
 import { expect } from "chai";
 
 describe("Credits tests", () => {

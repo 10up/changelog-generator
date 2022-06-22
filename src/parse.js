@@ -1,4 +1,4 @@
-let knownPrefixes;
+export let knownPrefixes;
 
 export function addPrefixes(pattern) {
   knownPrefixes = new RegExp(pattern);
@@ -66,7 +66,7 @@ export function makeCredits(issue) {
   return [];
 }
 
-function makePrefix(line, participants) {
+export function makePrefix(line, participants) {
   if (!knownPrefixes.test(line)) {
     if (participants.find((el) => el.login === "dependabot[bot]")) {
       // Put @dependabot PRs to "Security" group
