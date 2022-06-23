@@ -26,7 +26,9 @@ export function makeEntries(issue) {
 
   return lines
     .filter((line) => line.length > 0)
-    .map((line) => line.replace(/^>\s/, "")); // remove "RE" prefix
+    .map((line) => line.replace(/^>\s/, "")) // remove "RE" prefix
+    .map((line) => line.replace(/^-\s/, "")) // unordered list
+	.map((line) => line.replace(/^[\d]+\.\s/, "")) // ordered list
 }
 
 export function makeGroups(entries) {
