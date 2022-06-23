@@ -5,6 +5,13 @@ export function addPrefixes(pattern) {
 }
 
 export function makeChangelog(issue, participants) {
+  return makeEntries(issue)
+    .map((line) => addProps(line, participants))
+    .map((line) => addVia(line, issue))
+    .map((line) => makePrefix(line, participants)); // Add prefix to lines which don't have it;
+}
+
+export function makeEntries(issue) {
   // PR title by default.
   let lines = [issue.title];
 
@@ -18,11 +25,8 @@ export function makeChangelog(issue, participants) {
   }
 
   return lines
-    .filter((line) => line.length > 0) // non-empty
-    .map((line) => line.replace(/^>\s/, "")) // remove "RE" prefix
-    .map((line) => addProps(line, participants))
-    .map((line) => addVia(line, issue))
-    .map((line) => makePrefix(line, participants)); // Add prefix to lines which don't have it;
+    .filter((line) => line.length > 0)
+    .map((line) => line.replace(/^>\s/, "")); // remove "RE" prefix
 }
 
 export function makeGroups(entries) {
