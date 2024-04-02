@@ -13,7 +13,7 @@
     "url": "https://10up.com"
   },
   "engines": {
-    "node": ">=16.0"
+    "node": ">=20.0"
   },
   "scripts": {
     "test": "mocha"
